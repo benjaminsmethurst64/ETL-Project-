@@ -4,6 +4,7 @@ Kaggle:
 
 Data World:
     https://data.world/fivethirtyeight/college-majors/workspace/file?filename=recent-grads.csv
+    https://github.com/fivethirtyeight/data/tree/master/college-majors
 
 The goal is to combine these two tables to compare the amount of recent grads (2010-2012) noted from Data World
 and compare that information to the Kaggle salary information from 2017. We found that these two data sets are 
