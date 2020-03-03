@@ -1,0 +1,12 @@
+Data sources:
+Kaggle:
+    https://www.kaggle.com/wsj/college-salaries/version/1
+
+Data World:
+    https://data.world/fivethirtyeight/college-majors/workspace/file?filename=recent-grads.csv
+
+The goal is to combine these two tables to compare the amount of recent grads (2010-2012) noted from Data World
+and compare that information to the Kaggle salary information from 2017. We found that these two data sets are 
+close enough in recency where we would be able to compare how many recent grads are projected to make a certain 
+median amount early in their careers and later in their careers according to Kaggle. These data sets are joined 
+on major and majors not shared between the data sets are dropped along with null values. 
