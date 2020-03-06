@@ -1,13 +1,27 @@
-Data sources:
-Kaggle:
-    https://www.kaggle.com/wsj/college-salaries/version/1
+## ETL Project Report |  7 March 2020
+Ben Smethhurst
+Angela Boardman
 
-Data World:
-    https://data.world/fivethirtyeight/college-majors/workspace/file?filename=recent-grads.csv
-    https://github.com/fivethirtyeight/data/tree/master/college-majors
+---------------------
 
-The goal is to combine these two tables to compare the amount of recent grads (2010-2012) noted from Data World
-and compare that information to the Kaggle salary information from 2017. We found that these two data sets are 
-close enough in recency where we would be able to compare how many recent grads are projected to make a certain 
-median amount early in their careers and later in their careers according to Kaggle. These data sets are joined 
-on major and majors not shared between the data sets are dropped along with null values. 
+### Data Sources
+
+We identified two data sources, one from the Wall Street Journal via Kaggle.com and another from FiveThirtyEight via Data.world.
+
+
+*(2017, April). Where it Pays to Attend College: Salaries by college, region, and academic major [Dataset]. Retrieved from https://www.kaggle.com/wsj/college-salaries/version/1
+
+. Filename: degrees-that-pay-back.csv.  
+    
+*(2017). College Majors. Retrieved from https://data.world/fivethirtyeight/college-majors/workspace/file?filename=recent-grads.csv. Filename: recent-grads.csv. The data were published by FiveThirtyEight.com and made 
+available under a [Creative Commons Attribution 4.0 International License] (https://creativecommons.org/licenses/by/4.0/).
+ 
+ -------------------
+
+The source data were formatted as CSVs, which we read into DataFrames using Pandas. We determined that the two datasets were close enough in their coverage periods to compare and see how much money (median salary) recent 
+grads in various degree areas are projected to earn early and then later in their careers.
+
+In preparation for loading the data into a relational (PostgreSQL) database, we reduced each dataset by selecting only the columns that were relevant to our analysis.  We renamed the join column in one of the source tables to match the column name in the other table and re-formatted the "major" values from one table to uppercase. We experienced some difficulty with the Pandas indexes on our dataframes when we first attempted to load them to our database. A solution was dropping the default index and choosing one of the existing columns to serve as a new index named "id." 
+
+Once our Postrgres database was populated with the two tables we created in SQL we were able to perform an inner join on shared majors, dropping both unmatched rows and rows with null values. We saved our join query as a new table, which we then exported as a csv file.
+We were able to pull the new query table csv back into our dataframe for sorting and subsequent plotting with Matplotlib.  After some frustrating attempts to create a visualilzation, we learned that the currency values in our source data had to first be converted to numeric float values in order to (meaningfully) plot the data. We created a bar chart showing earning potential by major. 
